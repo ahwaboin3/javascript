@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //c02-03-01.html
+    //자료형 변환
+
+    //문자열 입력
+    //BOM 메소드 - prompt()
+    //prompt(메시지 문자열, 기본 입력 문자열)
+    // const input=prompt("message","_default")
+    // console.log(input);
+
+    //불 입력
+    //confirm(메시지 문자열)
+    //사용자에게 확인을 요구하는 메시지 창이 나타입니다.
+    //사용자가 [확인]버튼을 클릭하면 true를 리턴하고,
+    //[취소]버튼을 클릭하면 false를 리턴합니다.
+    // const input1=confirm("수락하시겠습니까?")
+    // console.log(input1);
+    
+    //숫자 자료형으로 변환하기
+    //다른 자료형을 숫자 자료형으로 변환할 때는 Number()함수를 사용합니다
+    //Number(자료)
+    //숫자가 적혀 있는 문자열을 숫자로 변환됩니다.
+    let n1=Number("273")
+    console.log(typeof(n1));
+
+    //다른 문자가 들어 있어서 숫자로 변환할 수 없는 문자열의 경우
+    //NaN(Not a Number)라는 값을 출력합니다.
+    //NaN은 자바스크립트에서 숫자이지만, 숫자로 나타낼 수 없는 숫자를
+    //뜻합니다.
+    //Number()함수를 사용해서 변환 했으므로 자바스크립트에서 자료형은
+    //숫자이지만,  실질적으로 숫자로 변환할 수 없으므로
+    //숫자가 아니다(Not a Number)라고 출력하는 것입니다
+    console.log(Number("$273"));
+    console.log(typeof(Number("$273")));
+    
+    //불을 숫자로 변환하면 true는 1로, false는 0으로 변환됩니다.
+    console.log("true 변환",Number(true));
+    console.log("false 변환",Number(false));
+
+    //숫자 연산자를 사용해 자료형 변환하기
+    //숫자 연산자 -,*,/를 사용하면 다른 자료형을 숫자 자료형으로
+    //변환 할 수 있습니다.
+    console.log(typeof("52"-2));
+    
+    
+    
+    
+</script>   
+</body>
+</html>

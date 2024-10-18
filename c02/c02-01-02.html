@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //c02-01-02.html
+    //상수와 변수
+    //상수는 항상 같은 수라는 의미로 값에 이름을 한 번 붙이면
+    //값을 수정할 수 없습니다.
+    //변수는 변할 수 있는 수로 값을 수정할 수 있습니다.
+
+    //상수(constant)
+    //상수의 선언
+    //const 이름 = 값
+    const pi=3.141592
+    console.log(pi);
+    
+    const str="원주율"
+    console.log(str);
+    
+    const b=true
+    console.log(b);
+
+    //상수는 한 번만 선언할 수 있으므로 선언할 때 반드시 값을 함께
+    //지정해줘야 합니다.
+    // const pi1(X)
+
+    //변수
+    //let 이름 = 값
+    let pi2=3.141592
+    let r = 10
+    let result=2*pi2*r
+    console.log(result);
+    
+    let g=9.8
+    let m=10
+    //변수는 값을 변경 가능 하다
+    g=9.80665
+    console.log(m*g);
+
+    //var 키워드
+    var v=0
+    //변수를 생성할 수 있는 키워드로 var키워드도 있습니다.
+    //과거의 자바스크립트에서 사용하던 키워드입니다.
+    //var키워드는 변수를 중복해서 선언할 수 있다는 위험성,
+    //변수가 속하는 범위가 애매하다는 이유로 let 키워드가 등장하면서
+    //대체 되었습니다.
+
+    //변수에 적용할 수 있는 연산자
+    //복합 대입 연산자
+    //+=, -=, *=, /=, %=
+    let value=10
+    value+=10
+    value =value+10
+    console.log(value);
+    
+    //증감 연산자
+    //변수++, ++변수, 변수--, --변수
+    let number=10
+    console.log(++number);
+    console.log(number++);
+    console.log(number);
+    
+    //undefined 자료형
+    //어떠한 경우에 undefined자료형이 나오는지 알아 보겠습니다.
+
+    //상수와 변수로 선언하지 않은 식별자
+    //상수와 변수로 선언하지 않은 자료형을 확인해보면 undefined가 나옵니다
+    console.log(typeof(abc));
+    console.log(typeof(iden));
+    
+    //값이 없는 변수
+    //변수를 선언하면서 값을 지정하지 않은 경우에 해당 식별자는 
+    //undefined자료형이 됩니다.
+    //참고로 상수는 선언할 때 반드시 값을 지정해야 하므로 값이 없는
+    //상수는 존재하지 않습니다
+    let a
+    console.log(typeof a);
+    
+    
+</script>
+</body>
+</html>
