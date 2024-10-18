@@ -50,7 +50,47 @@
     //변환 할 수 있습니다.
     console.log(typeof("52"-2));
     
+    let b2=true-0
+    console.log(b2)
+    console.log(typeof(b2))
+
+    //문자열 자료형으로 변환하기
+    //다른 자료형을 문자열 자료형으로 변환할 때는 String()함수를
+    //사용합니다
+    //String(자료)
+    console.log(String(52.273));
+    console.log(String(true));
+    console.log(String(false));
     
+    //문자열 연산자를 사용해 자료형 변환하기
+    //연결 연산자(+)를 사용하면 문자열이 아닌 다른 자료에 빈 문자열을
+    //연결하면 문자열 자료형으로 변환합니다.
+    console.log(273+"");
+    console.log(true+"");
+    let n2=42
+    console.log("n2의 값: "+n2);
+
+    //불 자료형으로 변환하기
+    //다른 자료형을 불 자료형으로 변환할 때는 Boolean()함수 사용합니다.
+    //Boolean(자료)
+    //대부분의 자료는 불로 변환했을 때 true로 변환됩니다.
+    // 5개의 자료형은 false로 변환됩니다
+    //0, NaN, ""(빈문자열), null, undefined
+    console.log(Boolean(0));
+    console.log(Boolean(NaN));
+    console.log(Boolean(""));
+    console.log(Boolean(null));
+    console.log(Boolean(undefined));
+
+    //논리 부정 연산자를 사용해 자료형 변환하기
+    //Boolean()함수를 사용하지 않고 논리 부정 연산자(!)를 사용해서
+    //다른 자료형을 불 자료형으로 변환할 수 있습니다.
+    //불이 아닌 다른 자료에 논리 부정 연산자를 2번 사용하면
+    //불 자료형으로 변환합니다.
+    console.log(!!273);
+    console.log(!!0);
+    console.log(!!"안녕하세요");
+    console.log(!!"");
     
     
 </script>   
