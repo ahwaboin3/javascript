@@ -8,6 +8,113 @@
 <body>
     <script>
         //c04/c04-01.html
+        //배열
+        //배열은 여러 자료를 묶어서 활용할 수 있는 특수한 자료입니다.
+
+        //배열 만들기
+        //배열은 여러 개의 변수를 한 번에 선언해 다룰 수 있는 자료형입니다
+        //배열은 대괄호[...]를 사용해 생성하고 내부의 값을 쉼표(,)로 구분해
+        //입력합니다.
+        //배열 내부에 들어 있는 값을 요소라고 합니다.
+        const array=[273,"String",true, function(){},{},[273,103]]
+        //출력된 배열 결과
+        console.log(array)
+
+        //배열 요소에 접근하기
+        //각가의 요소에 접근하려면 배열 바로 뒤에 대괄호[..]를 입력하고
+        //그 안에 숫자를 넣습니다
+        //요소의 순서를 인덱스라고 부릅니다
+        //배열[인덱스]
+        const numbers=[273,52,103,32]
+        console.log(numbers[0])
+        console.log(numbers[1])
+        console.log(numbers[1+1])
+        console.log(numbers[1*3])
+
+        //배열 요소 개수 확인하기
+        //배열.length
+        //배열 내부에 들어 있는 요소의 개수를 확인할 때는 배열의 length
+        //속성을 사용합니다
+        const fruits=["배",'사과',`키위`,"바나나"]
+        console.log(fruits.length)
+        //배열의 마지막 요소를 선택할 때 자주사용하는 패턴
+        console.log(fruits.length-1)
+
+        //배열 뒷부분에 요소 추가하기
+        //push()메소드를 사용해 배열 뒷부분에 요소 추가하기
+        //배열.push(요소)
+        const todos=["우유 구매","업무 메일 확인하기","필라테스 수업"]
+        console.log(todos)
+        todos.push("저녁 식사 준비하기")
+        console.log(todos)
+        todos.push("피아노 연습하기")
+        console.log(todos)
+
+        //자바스크립트에서 배열의 길이는 고정이 아닙니다.
+
+        //인덱스를 사용해 배열 뒷부분에 요소 추가하기
+        const fruitsA=["사과","배","바나나"]
+        fruitsA[10]="귤"
+        //3개의 요소를 가진 배열을 만든 위, 10번째 인덱스에 요소를
+        //강제로 추가할 수 있습니다. 이때 4~9번째 인덱스는
+        //아무 것도 없는 empty가 됩니다.
+        console.log(fruitsA)
+
+        const fruitsB=["사과","ldH","바나나"]
+        fruitsB[fruitsB.length]="귤"
+        fruitsB[fruitsB.length]="망고"
+        console.log(fruitsB)
+
+        //배열 요소 제거하기
+        //1. 인덱스를 기반으로 제거하는 경우
+        //2. 값을 기반으로 제거하는 경우
+
+        //인덱스로 요소 제거하기
+        //배열이 특정 인텍스에 있는 요소를 제거할 때는 splice()메소드를
+        //사용합니다.
+        //splice()메소드는 요소를 제거할 때뿐만 아니라 요소를 중간에
+        //넣을 때도 사용할 수 있습니다.
+
+        //제거 할때
+        //배열.splice(인덱스, 제거할 요소의 개수)
+        let itemsA=["사과","배","바나나"]
+        itemsA.splice(2,1)
+        console.log(itemsA)
+        itemsA=["사과","배","바나나","망고","복숭아"]
+        itemsA.splice(2,2)
+        console.log(itemsA)
+
+        //값으로 요소 제거하기
+        //값을 기반으로 요소를 제거할 때는 배열 내부에서 특정 값의 위치를
+        //찾는 indeOf()메소드를 사용해서 값의 위치를 추출한 뒤
+        //splice()메소드를 사용해 제거합니다.
+        //indexOf()메소드는 배열 내부에 요소가 있을 경우 인덱스를 리턴합니다.
+        //하지만  배열 내부에 요소가 없을 때는 -1을 리턴합니다.
+        const itemsB=["사과","배","바나나"]
+        const index=itemsB.indexOf("바나나")
+        console.log("index",index)
+        itemsB.splice(index,1)
+        console.log(itemsB)
+        const index1=itemsB.indexOf("바나나")
+        console.log(index1)
+        //문자열에도 indexOf()메소가 있습니다
+        const stringA="동해물과 백두산이 마르고 닳도록"
+        const index2=stringA.indexOf("백두산")
+        console.log(index2)
+
+        //splice()메소드는 배열 내부 요소를 하나만 제거할 수 있습니다
+        //배열 내부에 특정 값을 가진 요소를 모두 제거하고 싶을 때는
+        //filter()메소드를 사용해야 합니다.
+        let itemsE=["사과","배","바나나","귤","귤"]
+        itemsE=itemsE.filter((item)=>item!=="귤")
+        console.log(itemsE)
+
+        //배열의 특정 위치에 요소 추가하기
+        //배열.splice(인덱스,0,요소)
+        const itemsD=["사과","귤","바나나","오렌지"]
+        itemsD.splice(1,0,"양파")
+        console.log(itemsD)
+
     </script>
 </body>
 </html>
