@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c02-03-03.html
+        //템플릿 문자열
+        //문자열 내부에 표현식을 사입할 때 문자열 연결 연산자(+)를
+        //사용합니다.
+        console.log("표현식 (273+52)의 값은 "+(273+52)+"입니다...!")
+        console.log("changed")
+        //자바스크립트에서는 템플릿 문자열이라는 기능이 추가되어
+        //이러한 코드를 간단하게 작성할 수 있습니다.
+
+        //템플릿 문자열은 백틱(`)기호로 감싸 만듭니다. 문자열 내부에
+        //${...}기호를 사용하여 표현식을 넣으면 표현식이 문자열 안에서 
+        //계산됩니다.
+        console.log(`표현식 273+52의 값은 ${273+52}입니다...!`);
+        let n=0
+        let str1=`Hello World!${n}`
+        console.log(str1)
+        
+        //==연산자와 !=연산자
+        //===연산자와 !==연산자는 값과 자료형이 같은지를 비교하는 연산자입니다.
+        //==연산자와 !=연산자는 값이 같은지를 비교하는 연산자입니다
+        let variable="foo"
+        const constantValue="bar"
+        console.log(`1=="1" -> ${1=="1"}`);
+        console.log(`1==="1" -> ${1==="1"}`);
+        console.log(`false=="0" -> ${false=="0"}`);
+        console.log(`false==="0" -> ${false==="0"}`);
+        
+    </script>
+</body>
+</html>
