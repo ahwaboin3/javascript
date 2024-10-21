@@ -29,7 +29,42 @@
         console.log(date.getMinutes());
         //현재 초 구하기
         console.log(date.getSeconds());
-        
+
+        //오전과 오후 구분하기
+        //현재 시간을 0~23사이의 값으로 리턴
+        const hour=date.getHours()
+        console.log(hour);
+        if(hour<12){
+            console.log("오전입니다.")
+            
+        }
+        if(hour>=12){
+            console.log("오후입니다.")
+        }
+        //if else 조건문
+        if(hour<12){
+            console.log(`오전입니다.`)
+        }else{
+            console.log(`오후입니다.`)
+        }
+        //중첩 조건문
+        if(hour<11){
+            console.log("아침 먹을 시간입니다.");
+        }else{
+            if(hour<15){
+                console.log("점심 먹을 시간입니다.");
+            }else{
+                console.log("저녁 먹을 시간입니다.");
+            }
+        }
+        //else if 조건문
+        if(hour<11){
+            console.log("아침 먹을 시간입니다.");
+        }else if(hour<15){
+            console.log("점심 먹을 시간입니다.")
+        }else{
+            console.log("저녁 먹을 시간입니다.")
+        }
     </script>
 </body>
 </html>

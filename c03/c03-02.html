@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c03-02.html
+        //switch 조건문
+        // const input=Number(prompt("숫자를 입력하세요.","숫자"))
+        // switch(input%2){
+        //     case 0:
+        //         console.log("짝수입니다.");
+        //         break
+        //     case 1:
+        //         console.log("홀수입니다.")
+        //         break
+        //     default:
+        //         console.log("숫자가 아닙니다.")
+        // }
+        const date=new Date()
+        const hour=date.getHours()
+
+        switch(true){
+            case hour<11:
+                console.log("아침 먹을 시간입니다.")
+                break
+            case hour<15:
+                console.log("점심 먹을 시간입니다")
+                break
+            default:
+                console.log("저녁 먹을 시간입니다.")
+                break
+        }
+        //조건부 연산자 - 삼항 연산자
+        //기본 형태
+        //불 표현식?참일 때의 결과:거짓일 때의 결과
+        // const input=prompt("숫자를 입력해 주세요")
+        // const number=Number(input)
+        // const result=
+        //     (number>=0)?"0이상의 숫자입니다.":"0보다 작은 숫자입니다";
+        // console.log(result)
+        
+        //짧은 조건문
+        //논리 연산자의 특성을 조건문으로 사용하는 것입니다.
+
+        //논리합 연산자를 사용한 짧은 조건문
+        //true||...
+        //논리합 연산자는 앞이 true면 뒤에 어떤한 값이 들어 가도 항상 참입니다.
+        //V8 runtime -> javascript
+        //자바스크립트는 이처럼 참(true)이 확실할 때 추가 연산을 진행하지
+        //않습니다. 논리합 연산자의 좌변이 참이면 우변을 실행하지 않습니다.
+
+        true||console.log("true면 실행 될까요?")
+        false||console.log("false면 실행 될까요?")
+        //논리합 연산자를 사용한 짧은 조건문은
+        //불 표현식||불 표현식이 거짓일 때 실행할 문장
+        !true||console.log("true이지만 !붙여서 사용 응용")
+        !hour>12||console.log("오전입니다.")
+
+        //논리곱 연산자를 사용한 짧은 조건문
+        //false && ...
+        //논리곱 연산자는 좌변이 거짓이면 우변을 실행하지 않습니다.
+        //불 표현식 && 불 표현식이 참일 때 실행할 문장
+        const n1=2;
+        n1%2==0&&console.log("짝수입니다.")
+        if(n1%2==0) console.log("짝수입니다.")
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
