@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c05-02.html
+        //함수 응용
+        //콜백 함수
+        //함수도 하나의 자료형이므로 매개변수로 전달할 수 있습니다.
+        //이렇게 매개변수로 전달하는 함수를 콜백(callback)함수라고 합니다
+        function callThreeTimes(callback){
+            for(let i=0;i<3;i++){
+                callback(i)
+            }
+        }
+        function print(i){
+            console.log(`${i}번째 함수 호출`)
+        }
+        callThreeTimes(print)
+        //callThreeTimes()함수는 함수를 매개변수로 받아 해당 함수를
+        //3번 호출합니다. callThreeTimes()함수의 callback매개변수에
+        //print()함수를 전달했습니다. 그리고 callThreeTimes()함수 내부
+        //에서는 callback(i) 형태로 함수를 호출하고 있습니다.
+        //따라서 매개변수로 전달했던 print()함수가 print(0),print(1)
+        //print(2)로 차례차례 호출되어 실행 결과와 같은 결과를 냅니다.
+
+        //익명 함수 사용하기
+        callThreeTimes(function(i){
+            console.log(`${i}번째 함수 호출`)
+        })
+
+        //콜백 함수를 활용하는 함수:forEach()
+        //forEach()메소드는 배열이 갖고 있는 함수(메소드)로써
+        //단순하게 배열 내부의 요소를 사용해서 콜백 함수를 호출해줍니다.
+        //function(value,index,array) 호출할때 매개변수를 넣어 호출
+        //해준다.
+        let numbers=[273,52,103,32,57]
+        //forEach(callback){
+        //  ...여러 코드들
+        //  callback(value,index,array)
+        //}
+        //value - 배열의 요소, index - 인덱스 값, array - 배열 자체
+        numbers.forEach(function(value,index,array){
+            console.log(`배열:${array}`)
+            console.log(`${index}번째 요소:${value}`)
+        })
+        numbers.forEach(function(v){
+            console.log(`배열의 요소:${v}`)
+        })
+        numbers.forEach(function(v,i){
+            console.log(`${i}번째 요소:${v}`)
+        })
+        //콜백 함수를 활용하는 함수:map()
+        //map()메소드도 배열이 갖고 있는 함수입니다. map()메소드는
+        //콜백 함수에 리턴한 값을 기반으로 새로운 배열을 만드는 함수입니다.
+        
+        //모든 배열의 요소를 제곱한 새로운 배열을 만들기
+        numbers=[273,52,103,32,57]
+        let newNumbers=[]
+        for(let i in numbers){
+            newNumbers[i]=numbers[i]*numbers[i]
+        }
+        console.log(`newNumbers: ${newNumbers}`)
+
+        numbers=numbers.map(function(v){
+            return v*v
+        })
+        numbers.forEach(console.log)
+        //forEach()메소드에 console.log메소드 자체를 매개변수로 넘기면
+        //배열 전체 정보를 출력 해준다
+
+        //콜백 함수를 활용하는 함수:filter()
+        //filter()메소드도 배열이 갖고 있는 함수입니다. filter()메소드는
+        //콜백 함수에서 리턴하는 값이 true인 것들만 모아서 새로운 배열을
+        //만드는 함수입니다.
+
+        //배열에서 짝수만 모아서 새로운 배열로 만들기
+        numbers=[0,1,2,3,4,5]
+        const evenNumbers=numbers.filter(function(value){
+            return value%2===0
+        })
+        console.log(`원래 배열:${numbers}`)
+        console.log(`짝수만 추출:${evenNumbers}`)
+
+        
+    </script>
+</body>
+</html>
