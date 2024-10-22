@@ -206,6 +206,36 @@
         deepCopyData[1]="많이 변경된"
         console.log(originData)
         console.log(deepCopyData)
+
+        //기본 매개변수
+        //함수의 매개변수로 항상 비슷한 값을 입력하는 경우가 있습니다.
+        //항상 같은 매개변수를 여러 번 반복해서 입력하는 것이 귀찮게
+        //느껴질 수 있습니다. 이러한 경우에는 매개변수에 기본값을
+        //지정하는 기본 매개변수를 사용합니다.
+        //함수이름(매개변수, 매개변수=기본값, 매개변수=기본값)
+        //매개변수는 왼쪽부터 입력하므로 다음과 같이 함수를 작성하면
+        //기본 매개변수의 의미가 없습니다. b에 값을 전달하기 위해서는
+        //a에 값을 채워야 하기 때문입니다.
+        //function sample(a=기본값, b)
+        //함수이름(매1, 매2)
+
+        //기본 매개변수의 활용
+        //주급 계산기
+        function earnings(name,wage=9860,hours=9){
+            console.log(`# ${name}님의 급여 정보`)
+            console.log(`- 시급: ${wage}원`)
+            console.log(`- 근무시간: ${hours}시간`)
+            console.log(`- 급여: ${wage*hours}시간`)
+        }
+        console.log("# 월수금 알바")
+        earnings("학생1",9860,9)
+        console.log("# 화목토 알바")
+        earnings("학생1",9860,9)
+        earnings("학생1")
+        //매개변수에 값을 주는 경우가 우선 합니다
+        earnings("학생1",9900)
+        earnings("학생1",9900,10)
+        
     </script>
 </body>
 </html>
