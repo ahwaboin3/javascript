@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c05/c05-01.html
+        //함수
+        //함수의 기본 형태
+        //익명 함수
+        //기본 형태
+        //function(){}
+        //함수의 장점
+        //- 반복되는 코드를 한 번만 정의해놓고 필요할 때마다 호출하므로
+        //반복 작업을 피할 수 있습니다.
+        //- 긴 프로그램을 기능별로 나눠 여러 함수로 나누어 작성하면
+        //모듈화로 전체 코드의 가독성이 좋아집니다.
+        //기능별(함수별)로 수정이 가능하므로 유지보수가 쉽습니다.
+
+        //익명 함수 선언하기
+        const func=function(){
+            console.log("함수 내부의 코드입니다...1")
+            console.log("함수 내부의 코드입니다...2")
+            console.log("함수 내부의 코드입니다...3")
+        }
+        //함수를 호출
+        func()
+        func()
+
+        //함수의 자료형을 확인
+        console.log(typeof(func))
+        console.log(func)
+
+        //선언적 함수
+        //이름이 있는  함수를 선언적 함수라고 합니다.
+        function namedFunc(){
+            console.log("함수 내부의 코드입니다...1")
+            console.log("함수 내부의 코드입니다...2")
+            console.log("함수 내부의 코드입니다...3")
+        }
+        namedFunc()
+        namedFunc()
+
+        console.log(typeof namedFunc)
+        console.log(namedFunc)
+        //익명 함수와 큰 차이는 없지만, 함수를 출력했을 때 함수에
+        //이름이 붙어 있습니다.
+
+        //매개변수와 리턴값
+        //함수를 호출할 때 괄호 안에 적는 것을 매개변수라고 합니다.
+        //함수의 최종 결과를 리턴값이라고 부릅니다.
+        
+        //매개변수로 x를 넣으면 x^2을 리턴하는 함수
+        function f(x){
+            return x*x
+        }
+        console.log(f(3))
+
+        //매개변수의 타입과 수가 자유롭다
+        const printAll=function(param){
+            console.log(param)
+        }
+
+        //함수의 매개변수는 어떠한 자료형도 대입 가능하다
+        printAll(42)
+        printAll("foo")
+        printAll([1,2,3])
+        printAll(true)
+
+        //호출 할 때 매개변수의 갯수를 안맞추어도 컴파일 에러가 나지 않는다
+        printAll(42,43)
+        //선언되어 있는 매개 변수 갯수만큼만 순서데로 대입되어 쓰인다
+
+        const someParams=function(p1,p2,p3,p4){
+            console.log(p1,p2,p3,p4)
+        }
+        someParams(1)
+        someParams(1,2)
+        someParams(1,2,3)
+        someParams(1,2,3,4)
+        someParams(1,2,3,4,5)
+
+        //나머지 매개변수
+        //호출할 때 매개변수의 개수가 고정적이지 않은 함수를 가변 매개변수
+        //함수라고 부릅니다. 이러한 함수를 구현할 때는 나머지 매개변수라는
+        //특이한 형태의 문법을 사용합니다.
+        function sample(...items){
+            console.log(items)
+        }
+        sample(1,2)
+        sample(1,2,3)
+        sample(1,2,3,4)
+        //나머지 매개변수는 매개변수들이 배열로 들어옵니다.
+
+        //여러수의 최소값 구하기
+        function min(...items){
+            let output=items[0]
+            for(const item of items){
+                if(output>item){
+                    output=item
+                }
+            }
+            return output
+        }
+        console.log(min(52,273,32,103))
+        console.log(min(1,2,3,4,5,6,7,8))
+        console.log(min(56,347,9534,6,723,45,67,78,90,2346))
+    </script>
+</body>
+</html>
