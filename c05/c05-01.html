@@ -108,6 +108,104 @@
         console.log(min(52,273,32,103))
         console.log(min(1,2,3,4,5,6,7,8))
         console.log(min(56,347,9534,6,723,45,67,78,90,2346))
+
+        //나머지 매개변수와 일반 매개변수 조합하기
+        function unionSample(a,b,...c){
+            console.log(a,b,c)
+        }
+        unionSample(1,2)
+        unionSample(1,2,3)
+        unionSample(1,2,3,4)
+        //함수를 호출할 때 매개변수 a,b가 먼저 들어가고,
+        //남은 것들은 모두 c에 배열 형태로 들어 갑니다.
+
+        //매개변수의 자료형에 따라 다르게 작동하는 min()함수
+        function anyTypeMin(first,...rests){
+            let output
+            let items
+            //매개변수의 자료형에 따라 조건 분기하기
+            //typeof(array)=="object"와 같은 형태로 배열인지
+            //확인 하게 되면 다른 객체 타입과 혼동이 된다
+            //정확하게 배열인지 확인하려면 Array.isArray()메소드를
+            //활용해야 합니다.
+            if(Array.isArray(first)){
+                output=first[0]
+                items=first
+            }else if(typeof(first)==="number"){
+                output=first
+                items=rests
+            }
+            for(const item of items){
+                if( output>item){
+                    output=item
+                }
+            }
+            return output
+        }
+        console.log(anyTypeMin([1,2,3,4]))
+        console.log(anyTypeMin(1,2,3,4,5,6))
+
+        //전개 연산자
+        //매개 변수로 배열을 입력할 수 없고 숫자를 입력해야 하는
+        //함수가 있다고 합시다
+        //min(1,2,3,4,5)
+        //배열 자료형으로 관리하므로
+        //const array=[1,2,3,4]
+        //min(array[0],array[1],...)
+        //배열을 전개해주는 전개 연산자를 제공합니다
+        //...배열이름
+        //전개 연산자는 다양한 곳에 활용할 수 있습니다.
+        //이번에는 함수를 호출할 때 매개변수로 전개연산자를 사용하는 것을
+        //알아보도록 하겠습니다.
+        function simplePrint(...items){
+            console.log(items)
+        }
+        const sampleArr=[1,2,3,4]
+        //전개 연산자를 사용하지 않은 경우
+        simplePrint(sampleArr)
+        //전개 연산자를 사용한 경우
+        simplePrint(...sampleArr)
+        //전개 연산자를 사용한 경우에는 숫자가 하나하나 전개되어
+        //매개변수로 들어 오는 것을 볼 수 있습니다.
+        //simplePrint(...sampleArr)->simplePrint(...[1,2,3,4])
+        //->simplePrint(1,2,3,4)
+
+        //불변성(immutability)
+        //불변 타입(immutable type)
+        //Boolean, String, Number, Null, undefied
+        let name="foo"
+        name="bar"
+        //foo라는 string타입의 값이 메모리에 생성되고, name은 메모리에
+        //생성된 foo를 가리킨다(주소를 가지고 있는다)
+        //bar라는 새로운 string타입의 값이 새로 생성되고,
+        //name은 다시 bar를 가리킨다
+
+        //변성 타입(Mutable type)
+        //자바스크립에서는 위에 나열한 기본 타입을 제외하고
+        //모든 값은 객체 타입이며 변할 수 있는 값이다.
+        //객체는 새로운 값이 만들어지지 않고 직접적으로 변경이 가능하다.
+        let a=[1,2,3]
+        let b=a
+        b[0]=42
+        console.log("a",a)
+
+        //불변성 기본 타입
+        let c=1
+        let d=c
+        d=42
+        console.log("c",c)
+
+        //원본을 보존할때도 전개 연산자를 활용
+        const originData=["아주","중요한","자료"]
+        //얕은 복사(copy) - 같은 메모리 공간을 동시에 참조
+        const useDate=originData
+        useDate[1]="안중요한"
+        console.log(originData)
+        //깊은 복사(deep copy) - 새로운 메모리 공간에 복사
+        const deepCopyData=[...originData]
+        deepCopyData[1]="많이 변경된"
+        console.log(originData)
+        console.log(deepCopyData)
     </script>
 </body>
 </html>
