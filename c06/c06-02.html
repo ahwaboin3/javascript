@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c06-02.html
+        //객체의 속성과 메소드 사용하기
+        //자료는 크게 기본 자료형과 객체 자료형으로 구분할 수 있다
+
+        //객체 자료형
+        //속성과 메소드를 가질 수 있는 모든 것은 객체입니다.
+        const a=[]
+        a.sample=10
+        console.log(a.sample)
+        //함수도 객체입니다.
+        function b(){}
+        b.sample=10
+        console.log(b.sample)
+        //함수는 실행이 가능한 객체라는 특이한 자료로 typeof 연산자를
+        //사용해서 자료형을 확인하면 function을 출력합니다.
+        //함수는 객체의 특성을 완벽하게 가지고 있으므로 자바스크립트에서는
+        //함수를 일급객체, 일등시민에 속한다고 표현하기도 합니다.
+
+        //기본 자료형
+        //기본 자료형은 객체가 아니므로 속성을 가질 수 없습니다.
+        const c=273
+        c.sample=10
+        console.log(c.sample)
+        //속성을 추가하는 것처럼 보이지만 출력이 undefined로 나오므로
+        //속성이 추가되지 않았다는 것을 알 수 있습니다.
+
+        //기본 자료형을 객체로 선언하기
+        //숫자, 문자열, 불등로 자료형을 변환하는 함수(Number,String
+        //Boolean)는 다음과 같이 사용합니다.
+        //const 객체=new 객체 자료형 이름()
+        const f=new Number(273)
+        console.log(typeof f)
+        f.sample=10
+        console.log(f.sample)
+
+        //기본 자료형의 일시적 승급
+        //문자열의 length속성을 사용해본 적이 있따.
+        console.log("안녕하세요".length)
+        //기본 자료형은 속성과 메소드를 가질 수 없습니다
+        //사용의 편리성을 위해서 기본 자료형의 속성과 메소드를
+        //호출할 때 일시적으로 기본 자료형을 객체로 승급시킵니다.
+        //그래서 속성과 메소드를 사용할 수 있는 것입니다.
+        //이러한 승급은 일시적이라서 sample속성에 기본 자료형이 추가되는
+        //것처럼 보였지만, 실제로는 추가되지 않는 현상이 일어난 것입니다.
+        //기본 자료형의 경우 속성과 메소드를 사용할 수는 있지만
+        //속성과 메소드를 추가로 가질 수는 없다고 생각하면 됩니다.
+
+        //프로토타입으로 메소드 추가하기
+        //숫자 객체 전체에 어떤 속성과 메소드를 추가할 수 있다면
+        //기본 자료형 숫자도 속성과 메소드를 사용할 수 있습니다
+        //어떤 객체의 prototype이라는 속성이 속성과 메소드를 가지고 있는
+        //부분입니다.
+        //prototype객체에 속성과 메소드를 추가하면 모든 객체에서 해당
+        //속성과 메소드를 사용할 수 있습니다.
+        Number.prototype.sample=10
+        const i=273
+        console.log(i.sample)
+
+        //최신 자바스크립트에는 제곱 연산자(**)가 있습니다.
+        //이를 사용해서 숫자를 n제곱하는 메소드를 숫자 객체에 넣는다
+        console.log(2**2)
+        console.log(2**32)
+
+        Number.prototype.power=function(n=2){
+            return this.valueOf()**n
+        }
+        const testNum=12
+        console.log("testNum.power():",testNum.power())
+        console.log("testNum.power(3):",testNum.power(3))
+        console.log("testNum.power(4):",testNum.power(4))
+
+        //배열 내부에 어떤 자료가 있는지 확인할때는 indexOf()메소드를
+        //사용합니다
+        const j="안녕하세요"
+        console.log(j.indexOf("안녕"))
+        console.log(j.indexOf("하세"))
+        //문자열 내에 있는 문자열이라면 그 인덱스를 출력합니다.
+        console.log(j.indexOf("없는 문자열"))
+        //문자열 내에 없는 문자열이라면 -1을 출력합니다.
+
+        //이를 이용해서 문자열.contain(문자열)했을 때 true또는
+        //false를 리턴하는 형태로 변경하면 나름 편리하게 사용할 수 있습니다
+
+        String.prototype.contain=function(data){
+            return this.indexOf(data)>=0
+        }
+        const str="안녕하세요"
+        console.log("안녕 in 안녕하세요:",str.contain("안녕"))
+        console.log("없다 in 안녕하세요 :",str.contain("없다"))
+
+        //Number 객체
+        //기본자료형과 연결된 객체에서 자주 사용하는 메소드를 알아보겠습니다.
+        
+        //숫자 N번째 자릿수까지 출력하기:toFixed()
+        //소수점 이하 몇 자리까지만 출력하고 싶을 때 사용합니다.
+        //소수점 아래 2자리까지 출력하고 싶다면 toFixed(2),
+        //3자리까지 출력하고 싶다면 toFixed(3)형태로 사용합니다.
+        const l=123.456789
+        console.log(l.toFixed(2))
+        console.log(l.toFixed(3))
+        console.log(l.toFixed(4))
+
+        //NaN과 Infinity확인하기:isNaN(),isFinite()
+        const m=Number("숫자로 변환할 수 없는 경우")
+        console.log(m)
+        console.log(m===NaN)
+        console.log(Number.isNaN(m))
+        
+        const n=10/0
+        console.log(n)
+        const o=-10/0
+        console.log(o)
+        //isFinite 유한한 숫자인가?
+        console.log(Number.isFinite(n))
+        console.log(Number.isFinite(o))
+        console.log(Number.isFinite(1))
+        console.log(Number.isFinite(10))
+        //NaN과 다르게 무한대 값은 배교 연산자로 비교할 수 있습니다.
+        console.log(n===Infinity||n===-Infinity)
+
+        //String 객체
+        //문자열 양쪽 끝의 공백 없애기:trim()
+        const stringB="    앞과 뒤에 공백      "
+        console.log(stringB.trim())
+
+        //문자열을 특정 기호로 자르기:split()
+        const dateStr="10-23-2024"
+        const dateArr=dateStr.split("-")
+        console.log(dateArr)
+        const kStyleDate=`${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`
+        console.log(kStyleDate)
+        const spaceStr="달러 엔 유로"
+        console.log(spaceStr.split(" "))
+
+        //JSON 객체
+        //네트워크에서 데이터를 주고 받을 때 사용하는 다양한 자료 표현 방식
+        //CSV, XML, CSON등의 있습니다.
+        //현재 가장 많이 사용되는 자료 표현 방식은 JSON객체입니다.
+        //JSON은 JavaScript Object Notation의 약자로 자바스크립트의
+        //객체처럼 자료를 표현하는 방식입니다.
+        //JSON 형식의 추가 규칙
+        //값을 표현할 때는 문자열, 숫자, 불 자료형만 사용할 수 있습니다.
+        //문자열은 반드시 큰따옴표로 만들어야 합니다.
+        //키에도는 반드시 따옴표를 붙여햐 합니다.
+        const jsonOne={
+            "name":"자바스크립트",
+            "브라우저":"크롬",
+            "회사":"구글",
+        }
+        const jsonMulti={
+            arr:[
+                {
+                    "name":"자바스크립트",
+                    "브라우저":"크롬",
+                    "회사":"구글",
+                },
+                {
+                    "name":"자바",
+                    "런타임":"JVM",
+                    "회사":"오라클",
+                }
+            ]
+        }
+        //Math 객체
+        //수학과 관련된 기본적인 연산을 할 때는 Math객체 사용합니다.
+        const dice=Math.floor((Math.random()*6)+1)
+        console.log(dice)
+        //Math.floor - 소수점 이하를 버림한다
+    </script>
+</body>
+</html>

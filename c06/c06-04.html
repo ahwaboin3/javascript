@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c06-04.html
+        //객체와 배열 고급
+        //속성 존재 여부 확인
+        //객체에 없는 속성에 접근하면 undefined자료형이 나옵니다.
+        //따라서 조건문으로 undefined인지 아닌지 확인하면 속성
+        //존재 여부를 확인할 수 있습니다.
+
+        const object={
+            name:"채식주의자",
+            price:9450,
+            publisher:"한빛미디어"
+        }
+        if(object.name!=undefined){
+            console.log("name 속성이 있습니다.")
+        }else{
+            console.log("name 속성이 없습니다.")
+        }
+        if(object.author!=undefined){
+            console.log("author 속성이 있습니다.")
+        }else{
+            console.log("author 속성이 없습니다.")
+        }
+        //개발자들은 일반적으로 더 간단하게 검사하려고 줄여 씁니다
+        if(object.name){
+            console.log("name 속성이 있습니다.")
+        }else{
+            console.log("name 속성이 없습니다.")
+        }
+        if(object.author){
+            console.log("author 속성이 있습니다.")
+        }else{
+            console.log("author 속성이 없습니다.")
+        }
+        //짧은 조건문
+        object.name||console.log("name속성이 없습니다")
+        object.author||console.log("author속성이 없습니다")
+
+        //객체의 속성 지정하기
+        object.name=object.name!==undefined?object.name:"제목 미정"
+        object.author=
+            object.author!==undefined?object.author:"저자 미상";
+        console.log(object)
+        //기본 속성 지정할 때 쓰는 코드
+
+        //짧은 조건문
+        object.name=object.name||"제목 미정"
+        object.author=object.author||"제목 미정"
+
+        //배열 기반의 다중 할당
+        //한 번에 여러 개의 변수에 값을 할당하는 다중 할당 기능이
+        //추가 되었습니다.
+        //[식별자,식별자,식별자,..]=배열
+        const arr=[1,2,3]
+        let n1=arr[0]
+        let n2=arr[1]
+        let n3=arr[2]
+        console.log(n1,n2,n3)
+        let [a,b,c]=arr;
+        console.log(a,b,c)
+        //서로 값을 교환할때도 사용 된다
+        // [a,b,c]=[c,b,a]
+        // console.log(a,b,c)
+
+        //배열의 길이가 5인 값을 변수 3개에 다중할당할때
+        //앞의 3개만 할당됩니다.
+        let arrayA=[1,2,3,4,5]
+        const [x,y,z]=arrayA
+        console.log(x,y,z)
+
+        //객체 기반의 다중 할당
+        //{속성 이름, 속성 이름}=객체
+        //{식별자=속성 이름,식별자=속성 이름}=객체
+        const obj={
+            name:"채식주의자",
+            price:"10000",
+            publisher:"창비"
+        }
+        const {name,price}=obj
+        console.log("# 속성 이름 그대로 꺼내서 출력하기")
+        console.log(name,price)
+        console.log("")
+
+        const {pro1=name,pro2=price}=obj
+        console.log("# 다른 이름으로 속성 꺼내서 출력하기")
+        console.log(pro1,pro2)
+
+        //배열 전개 연산자
+        //배열과 객체는 할당할 때 얕은 복사라는 것이 이루어집니다.
+        //배열을 복사해도 다른 이름을 붙일 뿐입니다.
+        const p1=["우유","식빵"]
+        const p2=p1
+        p2.push("고구마")
+        console.log(p1)
+        console.log(p2)
+        //깊은 복사
+        //깊은 복사라면 복사한 두 배열이 완전히 독립적으로 작동합니다.
+        //전개연산자를 사용하면 깊은 복사가 됩니다.
+        const p3=[...p1]
+        p3.push("토마토")
+        console.log(p1)
+        console.log(p3)
+
+        //깊은 복사를 하면서 자료를 앞뒤로 추가 할때도 간편하게
+        //전개 연산자를 사용합니다
+        const p4=["우유","식빵"]
+        const p5=["고구마",...p4,"토마토"]
+        console.log(p4)
+        console.log(p5)
+        
+        //다른 2개 이상의 배열을 붙일 때도 활용합니다.
+        const p6=["우유","식빵"]
+        const p7=["고구마","토마토"]
+        const p8=[...p6,...p7]
+        const p9=[...p7,...p6]
+
+        //객체 전개 연산자
+        //전개 연산자를 사용한 객체 복사
+        //{...객체}
+        
+        //전개 연산자를 사용해 깊은 복사하기
+        const cloud={
+            name:"구름",
+            age:6,
+            kind:"강아지"
+        }
+        const star={...cloud}
+        star.name="별"
+        star.age=1
+        console.log(cloud)
+        console.log(star)
+
+        //전개연산자를 사용해서 복사하면서 객체 요소 추가
+        const star1={
+            ...cloud,
+            name:"별",//기존의 속성 덮어 쓰기
+            age:1,//기본의 속성 덮어 쓰기
+            vaccin:true,
+        }
+        console.log(cloud)
+        console.log(star1)
+
+        //전개를 어떤 위치에 하는지에 따라 결과가 달라집니다.
+        const star2={
+            name:"별",
+            age:1,
+            vaccin:true,
+            ...cloud
+        }
+        console.log(star2)
+        //뒤에 입력하는 cloud가 모두 덮어 씁니다.
+    </script>
+</body>
+</html>
