@@ -115,9 +115,9 @@
         }
         //애플리케이션 개발자가 SquareThrow라는 라이브러리를 사용해서
         //개발할 때
-        const st=new SquareThrow(-10)
-        console.log(`정사각형의 둘레:${st.getPerimeter()}`)
-        console.log(`정사각형의 넓이:${st.getArea()}`)
+        // const st=new SquareThrow(-10)
+        // console.log(`정사각형의 둘레:${st.getPerimeter()}`)
+        // console.log(`정사각형의 넓이:${st.getArea()}`)
 
         //하지만 이러한 코드만으로는 다음과 같이 생성자로 객체를
         //생성한 이후에 사용자가 length속성을 변경하는 것을 막을 수 없습니다.
@@ -136,6 +136,91 @@
         //붙어 있는 속성과 메소드는 모두 private속성과 메소드가 됩니다.
         //private 속성은 사용하기 전에 미리 외부에 어떤 속성을 private
         //속성으로 사용하겠다고 선언해줘야 합니다.
+
+        class Square1{
+            //이 취이에 해당 속성을 private속성으로 사용하겠다고
+            //미리 선언합니다.
+            #length
+            constructor(length){
+                if(length<=0){
+                    throw "길이는 0보다 커야 합니다."
+                }
+                this.#length=length
+            }
+            getPerimeter(){return 4*this.#length}
+            getArea(){return this.length*this.#length}
+        }
+        const square1=new Square1(10)
+        // square1.#length=-10
+        //이렇게 만든 private 속성은 클래스 외부에서는 접근할 수
+        //없으므로 클래스 사용자가 클래스를 잘못 사용하는
+        //문제를 줄일 수 있습니다.
+
+        //게터와 세터
+        //방금 살펴보았던 private속성을 사용하면 외부에서는 #length
+        //속성에 아예 접근할 수 없는 문제가 발생합니다.
+        //현재 square객체의 length속성이 몇인지 확인할 수도 없고,
+        //length속성을 변경하고 싶어도 변경할 수 없습니다.
+        //그래서 프레임워크 개발자들은 상황에 따라서 속성을 읽고 쓸 수 있는
+        //메소드를 만들어서 제공합니다.
+
+        class Square2{
+            #length
+
+            constructor(length){
+                this.setLength(length)
+            }
+
+            setLength(value){
+                if(value<=0){
+                    throw "길이는 0보다 커야 합니다."
+                }
+                this.#length=value
+            }
+
+            getLength(){
+                return this.#length
+            }
+
+            getPerimeter(){return 4*this.#length}
+            getArea(){return this.length*this.#length}
+        }
+        const s2=new Square2(10)
+        // s2.setLength(-10)
+        //처음 게터와 세터를 배우면 모든 private속성에 게터와 세터를
+        //붙이려고 하는 경우가 있습니다. 게터와 세터는 필요한 경우에만
+        //사용합니다.
+
+        //게터 세터를 더 쉽게 작성하고 사용할 수 있도록 다음과 같은
+        //get키워드와 set키워드 문법을 제공합니다.
+        //class 클래스이름{
+        // get 메소드이름(){return 값}
+        // set 메소드이름(value){}
+        //}
+
+        class Square3{
+            #length
+            constructor(length){
+                //set length(length)메소드 부분이 호출됩니다.
+                this.length=length
+            }
+            get length(){
+                console.log("get length가 호출되었습니다.")
+                return this.#length
+            }
+            set length(length){
+                console.log("set length가 호출되었습니다.")
+                if(length<=0){
+                    throw "길이는 0보다 커야 합니다."
+                }
+                this.#length=length
+            }
+        }
+        const s3=new Square3(10)
+        console.log(s3.length)
+
+        const arr=[1,2,3]
+        console.log(arr.length)
     </script>
 </body>
 </html>
