@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c07-02.html
+        //예외 처리 고급
+        //예외 객체
+        //try catch구문을 사용할 때 catch의 괄호 안에 입력하는 식별자가
+        //예외 객체입니다. 아무 식별자나 입력해도 괜찮지만, 일반적으로
+        //e나 exception이라는 식별자를 사용합니다.
+        //예외 객체가 갖고 있는 속성은 브라우저에 따라 조금씩 다릅니다.
+        //모든 웹 브라우저가 공통적으로 갖고 있는 속성을 정리하면
+        //다음과 같습니다.
+        //속성 이름 | 설명
+        //name | 예외 이름
+        //message | 예외 메세지
+
+        //자바스크립트의 배열 크기는 42억 정도
+        try{
+            const array=new Array(9999999999999999999999999)
+        }catch(exception){
+            console.log(exception)
+            console.log()
+            console.log(`예외 이름:${exception.name}`)
+            console.log(`예외 이름:${exception.message}`)
+        }
+
+        //예외 강제 발생
+        //예외를 강제로 발생시킬 때는 throw키워드를 사용합니다.
+        //throw구문
+        //단순하게 예외를 발생시킵니다
+        //throw 문자열
+        //조금 더 자세하게 예외를 발생시킵니다
+        //throw new Error(문자열)
+        // throw "문자열"
+        // throw new Error("문자열")
+        //2가지 예외 발생이 출력이 약간 다릅니다.
+
+        //0으로 나눌 때 0으로는 나눌 수 없습니다 라는 오류를 발생하도록
+        //작성하겠습니다.
+        function divide(a,b){
+            if(b===0){
+                throw "0으로는 나눌 수 없습니다."
+            }
+            return a/b
+        }
+        console.log(divide(10,2))
+        // console.log(divide(10,0))
+
+        //예외를 강제로 발생 시키는 이유는 내가 만든 함수를 내가
+        //사용할 때는 아무 문제없이 사용할 수 있겠지만
+        //내가 만든 함수를 다른 사람이 사용할 때는 내가 의도하지 않은
+        //형태로 코드를 사용할 수도 있습니다
+        //이럴 때 예외를 강제로 발생시키면 사용자에게 주의를 줄 수 있으며
+        //의도한 대로 처리하게 유도할 수도 있습니다.
+
+        function test(object){
+            console.log(object.a+object.b)
+        }
+        test({})
+        //일반적인 프로그래밍 언어라면
+        //-object객체에 a속성과 b속성이 없으므로 예외를 발생할 것이고
+        //-존재하지 않는 것을 더하므로 object.a+object.b를 할 때도
+        //예외를 발생합니다.
+        //그러면 사용자는 자신이 잘못 사용했다는 것을 인지하고 수정할 수
+        //있습니다.
+        //하지만 자바스크립트는
+        //- object.a가 undefined로 나오며, object.b도 undefined로
+        //나옵니다
+        //- 여기에서 undefined+undefined를 하면 NaN이 나옵니다.
+        //즉 아무 오류 없이 코드가 정상적으로 실행됩니다.
+        //이처럼 자바스크립트는 undefined와 NaN라는 값이 있어서
+        //다른 프로그래밍 언어에 비해서 예외를 많이 발생하지는 않습니다.
+        //그렇기 때문에 사용자에게 함수를 잘못 사용했다는 것을
+        //강제로라도 인지 시켜줄 필요가 있다는 것입니다.
+        
+        //위의 코드를 안전하게 사용하게 하려면 예외를 강제로 발생시켜주면
+        //됩니다
+        function test(object){
+            if(object.a!==undefined&&object.b!==undefined){
+                console.log(object.a+object.b)
+            }else{
+                try{
+                    throw new Error("a속성과 b속성을 지정하지 않습니다.")
+                }catch(e){
+                    console.log(e)
+                }
+            }
+        }
+        test({})
+        console.log("end")
+    </script>
+</body>
+</html>
