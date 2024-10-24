@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c08/c08-01.html
+        //클래스
+
+        //클래스의 기본 기능
+        //추상화
+        //현재 만들어지고 있는 대부분의 프로그램은 "우리가 어떤 데이를
+        //활용하는가?"라는 생각으로부터 시작됩니다.
+        //현실의 객체는 수많은 속성을 가지고 있고 그 속성들이 모두 데이터가
+        //될 수 있습니다. 사람은 예로 들면 키, 몸무게, 얼굴 둘레, 눈썹 길이
+        //눈 크기, 코 크기, 입 크기, 입술 주름 개수, 입술 주름 길이,
+        //머리카락 개수, 융털 개수, 융털 각각의 길처럼 말이지요. 그렇기
+        //때문에 현실에 존재하는 모든 정보를 완벽하게 컴퓨터 내부에
+        //입력하는 것은 불가능에 가깝습니다.
+        //병원에서 사용하는 업무 프로그램을 만든다면 의사, 간호사, 환자,
+        //병실, 예약 기록, 진료 기록, 입퇴원 기록과 같은 정보가 필요하고
+        //그 중에서 환자 정보를 사용한다면 환자 이름, 생년월일, 성별,
+        //연락처등만 알면 됩니다.
+        //이와 같이 프로그램에 필요한 요소만 사용해서 객체를 표현하는 것을
+        //추상화라고 부릅니다.
+        //복잡한 자료, 모듈, 시스템등으로부터 핵심적인 개념과 기능을
+        //간추려내는 것을 추상화라고 합니다.
+
+        //같은 형태의 객체 만들기
+        //학생 성적 관리 프로그램을 만든다고 생각해봅시다. 학생이라는
+        //객체가 필요하고, 그러한 학생들로 부터 성적 관리에 필요한
+        //공통사항을 추출하는데, 이를 추상화라고 합니다.
+        //객체를 선언합니다
+        const students=[]
+        students.push({name:"구름",kor:87,eng:98,math:88,sci:90})
+        students.push({name:"별이",kor:92,eng:98,math:96,sci:88})
+        students.push({name:"겨울",kor:76,eng:96,math:94,sci:86})
+        students.push({name:"바다",kor:98,eng:52,math:98,sci:92})
+        console.log(students)
+
+        //여기에서 각각의 객체에 학생들의 성적 총합과 평균을 구하는
+        //기능을 추가한다고 해봅시다.
+        let output="이름\t총점\t평균\n"
+        for(const s of students){
+            const sum=s.kor+s.eng+s.math+s.sci
+            const average=sum/4
+            output+=`${s.name}\t${sum}점\t${average}점\n`
+        }
+        console.log(output)
+
+        //객체를 처리하는 함수
+        //성적 총합을 구하는 기능과 평균을 구하는 기능은 여러 프로그램에서
+        //활용될 수 있습니다. 따라서 단순하게 계산하는 것보다
+        //함수로 만들어 놓으면 확장성을 고려했을 때 좋은 방법입니다.
+        //getSumOf()와 getAverageOf()라는 이름으로 함수를 만들고
+        //매개변수로 학생 객체를 받아 총합과 평균을 구하는 프로그램을
+        //만들어보겠습니다.
+
+        //총합을 구하는 함수
+        function getSumOf(student){
+            return student.kor+student.eng+student.math+student.sci
+        }
+        //평균을 구하는 함수
+        function getAverageOf(student){
+            return getSumOf(student)/4
+        }
+        //출력
+        let output1="이름\t총점\t평균\n"
+        for(const s of students){
+            output1+=
+                `${s.name}\t${getSumOf(s)}점\t${getAverageOf(s)}점\n`;
+        }
+        console.log(output1)
+
+        //전체적인 코드는 길어졌지만, 객체를 만드는 부분과 객체를
+        //활용하는 부분으로 나누었습니다. 이렇게 코드를 분할하면
+        //현재 시점에는 쓸데없이 코드가 길어졌다고 생각할 수 있습니다.
+        //하지만 객체에 더 많은 기능을 추가하게 되었을 때 객체를
+        //쉽게 유지보수할 수 있으며, 객체를 활용할 때도 더 간단하게 
+        //코드를 작성할 수 있습니다.
+
+        //객체의 기능을 메소드로 추가하기
+        //현재 코드에서는 객체가 학생 객체 하나이므로 이렇게 코드를
+        //작성해도 문제가 없지만, 객체의 수가 늘어나면 함수 이름 충돌이
+        //발생할 수 있습니다. 이러한 문제를 해결하기 위해 함수 이름을
+        //getAverageOfStudent()처럼 의미를 알 수 있도록 길게 작성할 수도
+        //있지만, 그러면 코드의 가독성이 떨어지는 문제가 생길 수도 있습니다.
+        //그래서 개발자들은 함수를 메소드로써 객체 내부에 넣어서 활용하는
+        //방법을 사용하기 시작합니다.
+
+        //students 배열 내부의 객체 모두에 메소드를 추가합니다.
+        for(const student of students){
+            student.getSum=function(){
+                return student.kor+student.eng+student.math+student.sci
+            }
+            student.getAverage=function(){
+                return this.getSum()/4
+            }
+        }
+
+        //출력
+        let output2="이름\t총점\t평균\n"
+        for(const s of students){
+            output2+=
+                `${s.name}\t${s.getSum()}점\t${s.getAverage()}점\n`;
+        }
+        console.log(output2)
+
+        //지금까지의 코드는 객체의 키와 값을 하나하나 모두 입력해서
+        //생성했습니다. 만약 함수를 사용해서 객체를 찍어내면 어떨까요?
+        //함수만 만들면 객체를 좀 더 손쉽게 생성할 수 있습니다.
+
+        //객체를 생성하는 함수
+        function createStudent(name,kor,eng,math,sci){
+            return {
+                name:name,
+                kor:kor,
+                eng:eng,
+                math:math,
+                sci:sci,
+                getSum(){
+                    return this.kor+this.eng+this.math+this.sci
+                },
+                getAverage(){
+                    return this.getSum()/4
+                },
+                toString(){
+                    return `${this.name}\t${this.getSum()}점\t${this.getAverage()}점\n`
+                }
+            }
+        }
+        //객체 생성
+        const students1=[]
+        students1.push(createStudent("구름",87,98,88,90))
+        students1.push(createStudent("별이",92,98,96,88))
+        students1.push(createStudent("겨울",76,96,94,86))
+        students1.push(createStudent("바다",98,52,98,92))
+        //출력
+        let output3="이름\t총점\t평균\n"
+        for(const s of students1){
+            console.log(s.toString())
+            output3+=s.toString()
+        }
+        console.log(output3)
+        //createStudent()함수를 만들고, 여기에 객체를 만들어 리턴하게
+        //만들었습니다.
+
+        //이렇게 함수를 만들면 여러 가지 이득이 발생합니다.
+        //-오탈자의 위험이 줄어듭니다.
+        //-코드를 입력하는 양이 크게 줄어듭니다.
+        //-마지막으로 속성과 메소드를 한 함수 내부에서 관리할 수 있으므로
+        //객체를 더 손쉽게 유지보수 할 수 있습니다.
+
+        //그런데 현재 코드에는 눈에 보이지 않는 문제가 있습니다. 객체별로
+        //getSum(), getAverage(), toString()메소드를 생성하므로
+        //함수라는 기본 자료형보다 무거운 자료형이 여러 번 생성됩니다.
+    </script>
+</body>
+</html>

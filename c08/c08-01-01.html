@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //c08-01-01.html
+    //클래스 선언하기
+    //객체들을 정의하고 그러한 객체를 활용해서 프로그램을 만드는 것을
+    //객체 지향 프로그래밍이라고 합니다. 이 패턴을 수많은 개발자들이
+    //활용하자 프로그래밍 언어 개발자들이 프로그래밍 언어에 객체를
+    //더 효율적으로 만들 수 있는 문법을 추가하기 시작했습니다.
+    //프로그래밍 언어 개발자들은 크게 클래스와 프로토타입이라는 2가지
+    //문법으로 객체를 효율적으로 만들 수 있게 했습니다.
+    //간단하게 구분하면 클래스는 객체를 만들 때 수많은 지원을 하는 대신
+    //많은 제한을 거는 문법입니다. 반면 프로토타입은 제한을 많이 하지
+    //않지만, 대신 지원도 별로 하지 않는 문법입니다.
+    //자바스크립트는 초기에 프로토타입 문법을 제공했습니다. 하지만 시대의
+    //모든 흐름이 클래스 문법의 승리로 이어지자, 최신 자바스크립트는
+    //클래스 문법을 제공하기 시작했습니다.
+
+    //클래스 생성
+    //class 클래스이름{}
+    //클래스를 기반으로 만든 객체는 전문 용어로 인스턴스(instance)라고
+    //부릅니다. 그냥 객체(object)라고 부르는 경우도 많습니다.
+    //인스턴스를 생성
+    //new 클래스이름()
+    //클래스: 이전에 살펴보았던 객체를 만드는 함수와 비슷한 것
+    //인스턴스(객체):이전에 만들었던 객체를 만드는 함수로 만든
+    //객체와 비슷한 것
+
+    //클래스 선언하고 인스턴스 생성하기
+    class Student{
+
+    }
+    //학생을 선언합니다
+    const student=new Student()
+    const students=[
+        new Student(),
+        new Student(),
+        new Student(),
+        new Student(),
+    ]
+    //클래스 이름은 첫 글자를 대문자로 지정하는 것이 개발들의 약속입니다.
+
+    //생성자
+    //new Student()라는 코드를 보면 Student 뒤에 함수처럼 괄호를 열고
+    //닫는 기호가 있습니다. 이는 객체가 생성될 때 호출되는 생성자라는
+    //이름의 함수입니다. 생성자는 메소드의 이름은 constructor입니다.
+    //constructor라는 이름으로 사용하는 것이 아니라 new Student()처럼
+    //클래스 이름으로 호출합니다.
+    class ClassName{
+        //생성자
+        constructor(){
+
+        }
+    }
+    //생성자는 클래스를 기반으로 인스턴스를 생성할 때 처음 호출되는 메소드
+    //입니다. 따라서 생성자에서는 속성을 추가하는 등 객체의 초기화 처리를
+    //합니다.
+
+    class Student{
+        constructor(name,kor,eng,math,sci){
+            this.name=name
+            this.kor=kor
+            this.eng=eng
+            this.math=math
+            this.sci=sci
+        }
+    }
+    const stuArr=[]
+    stuArr.push(new Student("구름",87,98,88,90))
+    stuArr.push(new Student("별이",92,98,96,88))
+    stuArr.push(new Student("겨울",76,96,94,86))
+    stuArr.push(new Student("바다",98,52,98,92))
+
+    //메소드
+    //메소드를 만들면 내부적으로 메소드가 중복되지 않고
+    //하나만 생성되어 활용됩니다.
+    class Student{
+        constructor(name,kor,eng,math,sci){
+            this.name=name
+            this.kor=kor
+            this.eng=eng
+            this.math=math
+            this.sci=sci
+        }
+
+        getSum(){
+            return this.kor+this.eng+this.math+this.sci
+        }
+        getAverage(){
+            return this.getSum()/4
+        }
+        toString(){
+            return `${this.name}\t${this.getSum()}점\t${this.getAverage()}점\n`
+        }
+    }
+    const stuMethodArr=[]
+    stuMethodArr.push(new Student("구름",87,98,88,90))
+    stuMethodArr.push(new Student("별이",92,98,96,88))
+    stuMethodArr.push(new Student("겨울",76,96,94,86))
+    stuMethodArr.push(new Student("바다",98,52,98,92))
+</script>
+</body>
+</html>
