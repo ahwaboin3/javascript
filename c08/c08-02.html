@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c08-02.html
+        //클래스의 고급 기능
+        //클래스의 추가적인 문법
+
+        //상속
+        class Rectangle{
+            constructor(width,height){
+                this.width=width
+                this.height=height
+            }
+            //사각형의 둘레를 구하는 메소드
+            getPerimeter(){
+                return 2*(this.width+this.height)
+            }
+            //사각형의 넓이를 구하는 메소드
+            getArea(){
+                return this.width*this.height
+            }
+        }
+        const rectangle=new Rectangle(10,20)
+        console.log(`사각형의 둘레:${rectangle.getPerimeter()}`)
+        console.log(`사각형의 넓이:${rectangle.getArea()}`)
+
+        //정사각형 클래스
+        class Square{
+            constructor(length){
+                this.length=length
+            }
+            //정사각형의 둘레를 구하는 메소드
+            getPerimeter(){
+                return 4*this.length
+            }
+            //정사각형의 넓이를 구하는 메소드
+            getArea(){
+                return this.length*this.length
+            }
+        }
+        const square=new Square(10)
+        console.log(`정사각형의 둘레:${square.getPerimeter()}`)
+        console.log(`정사각형의 넓이:${square.getArea()}`)
+        //코드를 보면 두 클래스는 큰 차이가 없습니다. 둘 다 사각혀이다 보니
+        //둘레를 구하는 메소드와 넓이를 구하는 메소드가 비슷합니다.
+        //클래스를 분리하는 것이 클래스를 활용하는 쪽에서는 편리하겠지만
+        //분리하면 클래스 선언 부분이 복잡해지는 문제가 발생합니다.
+        //이런 문제를 해결하기 위해 나온 것이 상속입니다. 상속은 클래스의
+        //선언 코드를 중복해서 작성하지 않도록 함으로써 코드의 생산 효율을
+        //올리는 문법입니다.
+        //기본적인 형태
+        //class 클래스이름 extends 부모클래스이름{}
+
+        //상속은 상속이라는 이름철머 어떤 클래스가 가지고 있는 유산
+        //(속성과 메소드)을 다른 클래스에게 물려주는 형태로 사용합니다.
+        //이때 유산을 주는 클래스를 부모클래스, 유산을 받는 클래스를
+        //자식 클래스라고 부릅니다.
+
+        //사각형 클래스를 상속 받는 정사각형 클래스
+        class SquareChild extends Rectangle{
+            constructor(length){
+                //부모의 생성자 함수를 호출하는 코드입니다.
+                super(length,length)
+            }
+        }
+        const sc=new SquareChild(10)
+        console.log(`정사각형의 둘레:${sc.getPerimeter()}`)
+        console.log(`정사각형의 넓이:${sc.getArea()}`)
+
+        //프로그래밍은 분업화가 매우 잘 되어 있는 분야입니다. 그래서
+        //프로그램을 개발할 때 사용하는 거대한 규모의 클래스, 함수,
+        //도구 등의 집합을 의미하는 프레임워크(framework)와 엔진(engine)
+        //이라는 것을 만드는 개발자와 이를 활용해서 다수를 대상으로 하는
+        //서비스, 애플리케이션, 게임을 개발하는 개발자가 다른 경우가
+        //많습니다. 전자를 프레임워크 개발 또는 엔진 개발자등으로 부르며,
+        //후자를 애플리케이션 개발자등으로 부릅니다.
+        //이때 애플리케이션 개발자들이 프레임워크와 엔진을 활용하는
+        //가장 기본적인 방법이 상속입니다.그래서 상속을 어느 정도 알아야
+        //프레임워크와 엔진을 다룰 수 있습니다.
+
+        //private 속성과 메소드
+        //개발의 규모가 커지면서 프레임워크 개발자와 애플리케이션 개발자가
+        //나뉘자, 코드들이 위험해지기 시작했습니다.
+        //프레임워크 개발자가 Square클래스를 만들고, 이를 애플리케이션
+        //개발자가 활용한다고 가정하고 코드로 살펴 보겠습니다.
+
+        //SquareChild클래스를 사용자가 음수 길이를 입력한 경우
+        const squareChild=new SquareChild(-10)
+        console.log(`정사각형의 둘레:${squareChild.getPerimeter()}`)
+        console.log(`정사각형의 넓이:${squareChild.getArea()}`)
+        //프레임워크 개발자가 SquareChild클래스를 만들때의 의도는
+        //길이라는 것에 음수를 허용하지 않았습니다.
+        //프레임워크 개발자들은 Square클래스를 만들 때 "설마 누가 길이를
+        //음수로 넣겠어"라고 생각했을 것입니다. 하지만 활용하는 사람은
+        //이러한 사실을 몰랐을 수 있습니다.
+
+        //이러한 문제를 막는 방법으로는 조건문을 활용해서 0이하의 경우
+        //예외를 발생시켜 클래스의 사용자에게 그렇게는 할 수 없다고
+        //인지시켜주는 방법이 있습니다.
+        class SquareThrow{
+            constructor(length){
+                if(length<=0){
+                    throw "길이는 0보다 커야 합니다."
+                }
+                this.length=length
+            }
+            getPerimeter(){return 4*this.length}
+            getArea(){return this.length*this.length}
+        }
+        //애플리케이션 개발자가 SquareThrow라는 라이브러리를 사용해서
+        //개발할 때
+        const st=new SquareThrow(-10)
+        console.log(`정사각형의 둘레:${st.getPerimeter()}`)
+        console.log(`정사각형의 넓이:${st.getArea()}`)
+
+        //하지만 이러한 코드만으로는 다음과 같이 생성자로 객체를
+        //생성한 이후에 사용자가 length속성을 변경하는 것을 막을 수 없습니다.
+        const st1=new SquareThrow(10)
+        st1.length=-10
+        console.log(`정사각형의 둘레:${st1.getPerimeter()}`)
+        console.log(`정사각형의 넓이:${st1.getArea()}`)
+        //이처럼 클래스 사용자가 클래스 속성(또는 메소드)을 의도하지
+        //않은 방향으로 사용하는 것을 막 클래스의 안정성을 확보하기 위해
+        //나온 문법이 private 속성과 메소드입니다.
+        //class 클래스이름{
+        // #속성이름
+        // #메소드 이름(){}
+        //}
+        //속성과 메소드 이름 앞에 #을 붙이기만 하면 됩니다. 이처럼 #이
+        //붙어 있는 속성과 메소드는 모두 private속성과 메소드가 됩니다.
+        //private 속성은 사용하기 전에 미리 외부에 어떤 속성을 private
+        //속성으로 사용하겠다고 선언해줘야 합니다.
+    </script>
+</body>
+</html>
