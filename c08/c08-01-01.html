@@ -62,7 +62,7 @@
     //입니다. 따라서 생성자에서는 속성을 추가하는 등 객체의 초기화 처리를
     //합니다.
 
-    class Student{
+    class Student1{
         constructor(name,kor,eng,math,sci){
             this.name=name
             this.kor=kor
@@ -80,7 +80,7 @@
     //메소드
     //메소드를 만들면 내부적으로 메소드가 중복되지 않고
     //하나만 생성되어 활용됩니다.
-    class Student{
+    class Student2{
         constructor(name,kor,eng,math,sci){
             this.name=name
             this.kor=kor
@@ -100,10 +100,17 @@
         }
     }
     const stuMethodArr=[]
-    stuMethodArr.push(new Student("구름",87,98,88,90))
-    stuMethodArr.push(new Student("별이",92,98,96,88))
-    stuMethodArr.push(new Student("겨울",76,96,94,86))
-    stuMethodArr.push(new Student("바다",98,52,98,92))
+    stuMethodArr.push(new Student2("구름",87,98,88,90))
+    stuMethodArr.push(new Student2("별이",92,98,96,88))
+    stuMethodArr.push(new Student2("겨울",76,96,94,86))
+    stuMethodArr.push(new Student2("바다",98,52,98,92))
+
+    //출력
+    let output="이름\t총점\t평균\n"
+    for(const s of stuMethodArr){
+        output+=s.toString()
+    }
+    console.log(output)
 </script>
 </body>
 </html>
