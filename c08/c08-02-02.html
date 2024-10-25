@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //c08-02-02.html
+        //오버라이드
+        //부모가 갖고 있는 함수를 자식에서 다시 선언해서 덮어쓰는 것을
+        //오버라이드라고 부릅니다. 프레임워크를 다룰 때 반드시 활용하는
+        //개념입니다.
+        class LifeCycle{
+            a(){console.log("a()메소드를 호출합니다.")}
+            b(){console.log("b()메소드를 호출합니다.")}
+            c(){console.log("c()메소드를 호출합니다.")}
+
+            call(){
+                this.a()
+                this.b()
+                this.c()
+            }
+        }
+        new LifeCycle().call()
+        class Child extends LifeCycle{
+            a(){
+                //부모에 있던 메소드의 내용도 사용하고 싶다면
+                //super.메소드()형태의 코드를 사용합니다.
+                super.a()
+                console.log("자식의 a()메소드입니다.")
+            }
+        }
+        new Child().call()
+        //코드를 실행하면 a()메소드가 덮어 쓰여졌으니 a()메소드의 내용을
+        //출력하는 것을 오버라이드라고 합니다.
+
+        //toString()
+        //자바스크립트의 모든 객체는 toString()이라는 메소드를 갖습니다
+        //Object라는 최상위 클래를 있으며, 어떤 클래스를 만들어도
+        //자동으로 Object클래스를 상속받게 되어서 발생하는 현상입니다.
+        //따라서 toString()이라는 이름으로 메소드를 만들면 Object클래스에
+        //있던 toString()메소드를 오버라이드하는 것이 됩니다.
+        //내부적으로 어떤 객체를 문자열로 만들 때 toString()메소드를
+        //호출합니다. 따라서 toString()메소드를 오버라이드하면 내부적으로
+        //문자열로 변환되는 형태를 바꿀 수 있습니다.
+        class Pet{
+            constructor(name,age){
+                this.name=name
+                this.age=age
+            }
+
+            toString(){
+                return `이름:${this.name}\n나이:${this.age}살`
+            }
+        }
+        const pet=new Pet("구름",6)
+        console.log(pet.toString())
+        console.log(pet+"")
+        //문자열 결합 연산자를 호출할 때 오버라이드한 toString()메소드의
+        //리턴값이 나오는 것을 확인할 수 있습니다.
+    </script>
+</body>
+</html>
